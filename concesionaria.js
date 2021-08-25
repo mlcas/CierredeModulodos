@@ -63,6 +63,8 @@ let concesionaria = {
 }
 console.log('--------------------------Buscar Auto---------------------');
 
+
+
   console.log(concesionaria.buscarAuto("APL123")); // aca solo imprimis por consola el erray on el objeto que cumplio con la condicion de la fila 26
   console.log('-------------------------Vender Auto---------------------');
   console.log(concesionaria.venderAutos("APL123")); // aca llamas a la funcion vender autos qque te modifico la propiedad vendido, paso de un false a un true
@@ -71,7 +73,7 @@ console.log(concesionaria.autosParaLaVenta()); // aca te devuelve el auto que no
 console.log('------------------------- Auto Nuevos---------------------');
 console.log(concesionaria.autosNuevos())
 console.log('------------------------- Lista de Ventas---------------------');
-console.log(concesionaria.listaDeVentas);
+console.log(concesionaria.listaDeVentas());
 console.log('------------------------- Total de Ventas---------------------');
 console.log(concesionaria.totalDeVentas())
 
