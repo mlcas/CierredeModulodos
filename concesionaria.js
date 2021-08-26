@@ -1,33 +1,22 @@
-let autos = require('./autos');
 
-// console.log(autos);
 
-// let autos=require('./autos')
-// let concesionaria = {
-//    autos: autos,
-//    buscarAuto: function(patente){
-//        for (i=0;i<autos.length;i++) {
-//              if(patente==autos[i].patente){
-//                return autos[i];
-//              }else{
-//                return null;
-//              }
-//          }
-//     }
-// }
-// concesionaria.buscarAuto('APL123'); // da error, autos ya fue declarado. 
-// console.log(concesionaria.autos)
-
-var autosQueImporte=require('./autos')
+var autosQueImporte=require('./autos');
+var personasQueImporte = require('./personas');
 let concesionaria = {
    autos:autosQueImporte , // la pripiedad autos tiene guardado autosQueImporte, por eso ongo autos.length
    buscarAuto: function(patente){
-       for (let i=0;i<autos.length;i++) {      
-             if(patente==autos[i].patente){ // aca i en la primera vuelta vale 0 y entras al objeto que te hablita a poner el .patente
-               return autos[i];//retorna un objeto x q en la fila 27 si se cumple la condicion te devuelve el objeto que esta en la posicion 0
+       for (let i=0;i<this.autos.length;i++) {      
+             if(patente==this.autos[i].patente){ // aca i en la primera vuelta vale 0 y entras al objeto que te hablita a poner el .patente
+               return this.autos[i];//retorna un objeto x q en la fila 27 si se cumple la condicion te devuelve el objeto que esta en la posicion 0
               }
          }
-         return null; 
+        //  return null; 
+        //  let busqueda = this.autos.foreach(elemento => elemento.patente == patente);
+        //  if(busqueda != null) {
+        //      return busqueda;
+        //  } else {
+        //      return null;
+        //  }
     },
     venderAutos:function(patente) {
       let autoEncontrado= this.buscarAuto(patente)   
@@ -46,20 +35,38 @@ let concesionaria = {
        listaDeVentas:function() {
         let lista = [];
         for (let i = 0; i < this.autos.length; i++) {
-          if(autos[i].vendido== true) {
-         lista.push(autos[i].precio)          
+          if(this.autos[i].vendido== true) {
+         lista.push(this.autos[i].precio)          
         }
       }
       return lista
   },
   totalDeVentas: function(){
     let ventas = this.listaDeVentas();
-    let ventasTotales = ventas.reduce(function(total,producto){
-      return total + producto.precio
-    })
-    return ventasTotales
-     
-  }
+    if(ventas.length == 0){ // aca es para el caso en que en lista de ventas tengas todos los autos sin vender
+//  ventas.length te devulve un numero, la cantidad de caracteres del array
+
+      return 0
+    } else {
+      let ventasTotales = ventas.reduce(function(total,producto){
+        return total + producto.precio
+      })
+      return ventasTotales
+       
+    }
+  },
+
+    puedeComprar: function(auto,persona){
+      let compras = this.autos
+    if (this.autos.capacidadDePagoTotal > this.autos.precio && this.autos.capaciadadDePagoEnCuotas > (this.autos.precio/this.autos.cuotas)){
+          return true
+    }  else {
+      false
+    }
+    
+
+    
+}
 }
 console.log('--------------------------Buscar Auto---------------------');
 
@@ -76,7 +83,8 @@ console.log('------------------------- Lista de Ventas---------------------');
 console.log(concesionaria.listaDeVentas());
 console.log('------------------------- Total de Ventas---------------------');
 console.log(concesionaria.totalDeVentas())
-
+console.log('------------------------- Puede Comprar---------------------');
+console.log(concesionaria.puedeComprar("ford","juan"))
 
 
 
