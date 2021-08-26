@@ -1,7 +1,8 @@
 
 
 var autosQueImporte=require('./autos');
-var personasQueImporte = require('./personas');
+// const personas = require('./personas');
+// var persona = require('./personas');
 let concesionaria = {
    autos:autosQueImporte , // la pripiedad autos tiene guardado autosQueImporte, por eso ongo autos.length
    buscarAuto: function(patente){
@@ -10,7 +11,7 @@ let concesionaria = {
                return this.autos[i];//retorna un objeto x q en la fila 27 si se cumple la condicion te devuelve el objeto que esta en la posicion 0
               }
          }
-        //  return null; 
+          return null; 
         //  let busqueda = this.autos.foreach(elemento => elemento.patente == patente);
         //  if(busqueda != null) {
         //      return busqueda;
@@ -56,15 +57,15 @@ let concesionaria = {
     }
   },
 
-    puedeComprar: function(auto,persona){
-      let compras = this.autos
-    if (this.autos.capacidadDePagoTotal > this.autos.precio && this.autos.capaciadadDePagoEnCuotas > (this.autos.precio/this.autos.cuotas)){
+    puedeComprar: function(auto,persona){ // hay que pasarle como parametros los 2 objetos
+      
+    if (persona.capacidadDePagoTotal > auto.precio  && persona.capacidadDePagoEnCuotas > (auto.precio/auto.cuotas)){
           return true
     }  else {
-      false
+       return false
     }
     
-
+  
     
 }
 }
@@ -84,7 +85,21 @@ console.log(concesionaria.listaDeVentas());
 console.log('------------------------- Total de Ventas---------------------');
 console.log(concesionaria.totalDeVentas())
 console.log('------------------------- Puede Comprar---------------------');
-console.log(concesionaria.puedeComprar("ford","juan"))
+console.log(concesionaria.puedeComprar({
+  marca: "Ford",
+  modelo: "Fiesta",
+  precio: 150000,
+  km: 200,
+  color: "Azul",
+  cuota: 12,
+  anio: 2019,
+  patente: "APL123",
+  vendido: false
+}, {
+  nombre: "Juan",
+  capacidadDePagoEnCuotas: 20000,
+  capacidadDePagoTotal: 200000,
+}));
 
 
 
